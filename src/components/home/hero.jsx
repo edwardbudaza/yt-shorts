@@ -34,7 +34,7 @@ export const Hero = () => {
           <Authentication>
             <Button
               size="lg"
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 active:scale-95 transition-all"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-black font-medium hover:bg-primary/90 active:scale-95 transition-all"
             >
               Get Started
               <Sparkles className="w-5 h-5 text-yellow-400" />
