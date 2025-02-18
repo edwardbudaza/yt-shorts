@@ -121,10 +121,19 @@ export const Header = ({ className }) => {
                 </Button>
               </Authentication>
             ) : (
-              <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
-                <DropdownMenuTrigger className="focus:outline-none">
-                  <Avatar
-                    className={`
+              <div className="flex items-center justify-between gap-4">
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 text-white font-medium hover:bg-gray-700 transition"
+                >
+                  <LayoutDashboard className="w-5 h-5" />
+                  Go to Dashboard
+                </Link>
+
+                <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+                  <DropdownMenuTrigger className="focus:outline-none">
+                    <Avatar
+                      className={`
                     cursor-pointer transition-colors
                     ${
                       hasScrolled
@@ -132,59 +141,60 @@ export const Header = ({ className }) => {
                         : 'border-2 border-white/50 hover:border-white'
                     }
                   `}
+                    >
+                      <AvatarImage src={user.photoURL} />
+                      <AvatarFallback className="bg-gray-800">
+                        {user.displayName?.charAt(0) || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="end"
+                    className="bg-gray-900/95 backdrop-blur-md border border-gray-800 rounded-lg shadow-xl w-64 p-2 animate-in slide-in-from-top-2"
                   >
-                    <AvatarImage src={user.photoURL} />
-                    <AvatarFallback className="bg-gray-800">
-                      {user.displayName?.charAt(0) || 'U'}
-                    </AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="bg-gray-900/95 backdrop-blur-md border border-gray-800 rounded-lg shadow-xl w-64 p-2 animate-in slide-in-from-top-2"
-                >
-                  {/* User Info Section */}
-                  <div className="p-2 text-center">
-                    <DropdownMenuLabel className="text-sm text-white font-semibold">
-                      {user.displayName}
-                    </DropdownMenuLabel>
-                    <div className="text-xs text-gray-400 truncate">{user.email}</div>
-                  </div>
-                  <DropdownMenuSeparator className="bg-gray-800" />
+                    {/* User Info Section */}
+                    <div className="p-2 text-center">
+                      <DropdownMenuLabel className="text-sm text-white font-semibold">
+                        {user.displayName}
+                      </DropdownMenuLabel>
+                      <div className="text-xs text-gray-400 truncate">{user.email}</div>
+                    </div>
+                    <DropdownMenuSeparator className="bg-gray-800" />
 
-                  {/* Navigation Items */}
-                  <div className="p-1">
-                    <Link href="/dashboard">
-                      <DropdownMenuItem className="flex items-center gap-2 text-gray-200 hover:text-white hover:bg-gray-800 cursor-pointer rounded-md">
-                        <LayoutDashboard className="w-4 h-4" />
-                        Dashboard
-                      </DropdownMenuItem>
-                    </Link>
-                    <Link href="/billing">
-                      <DropdownMenuItem className="flex items-center gap-2 text-gray-200 hover:text-white hover:bg-gray-800 cursor-pointer rounded-md">
-                        <CreditCard className="w-4 h-4" />
-                        Billing
-                      </DropdownMenuItem>
-                    </Link>
-                    <Link href="/settings">
-                      <DropdownMenuItem className="flex items-center gap-2 text-gray-200 hover:text-white hover:bg-gray-800 cursor-pointer rounded-md">
-                        <Settings className="w-4 h-4" />
-                        Settings
-                      </DropdownMenuItem>
-                    </Link>
-                  </div>
+                    {/* Navigation Items */}
+                    <div className="p-1">
+                      <Link href="/dashboard">
+                        <DropdownMenuItem className="flex items-center gap-2 text-gray-200 hover:text-white hover:bg-gray-800 cursor-pointer rounded-md">
+                          <LayoutDashboard className="w-4 h-4" />
+                          Dashboard
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link href="/billing">
+                        <DropdownMenuItem className="flex items-center gap-2 text-gray-200 hover:text-white hover:bg-gray-800 cursor-pointer rounded-md">
+                          <CreditCard className="w-4 h-4" />
+                          Billing
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link href="/settings">
+                        <DropdownMenuItem className="flex items-center gap-2 text-gray-200 hover:text-white hover:bg-gray-800 cursor-pointer rounded-md">
+                          <Settings className="w-4 h-4" />
+                          Settings
+                        </DropdownMenuItem>
+                      </Link>
+                    </div>
 
-                  <DropdownMenuSeparator className="bg-gray-800" />
+                    <DropdownMenuSeparator className="bg-gray-800" />
 
-                  {/* Logout Section */}
-                  <div className="p-1">
-                    <DropdownMenuItem className="flex items-center gap-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer rounded-md">
-                      <LogOut className="w-4 h-4" />
-                      Log out
-                    </DropdownMenuItem>
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    {/* Logout Section */}
+                    <div className="p-1">
+                      <DropdownMenuItem className="flex items-center gap-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer rounded-md">
+                        <LogOut className="w-4 h-4" />
+                        Log out
+                      </DropdownMenuItem>
+                    </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             )}
           </div>
         </div>
