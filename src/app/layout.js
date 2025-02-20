@@ -1,9 +1,10 @@
+import Head from 'next/head';
 import { Outfit } from 'next/font/google';
 import './globals.css';
 
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { AuthProvider } from '@/components/providers/auth-provider';
-import Head from 'next/head';
+import { ConvexClientProvider } from '@/components/providers/convex-client-provider';
 
 const font = Outfit({ subsets: ['latin'] });
 
@@ -56,7 +57,9 @@ export default function RootLayout({ children }) {
       </Head>
       <body className={font.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <AuthProvider>{children}</AuthProvider>
+          <ConvexClientProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </ConvexClientProvider>
         </ThemeProvider>
       </body>
     </html>
