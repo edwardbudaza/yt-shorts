@@ -39,9 +39,18 @@ export const metadata = {
     images: ['/og-image.svg'],
   },
   icons: {
-    icon: '/logo.svg', // Ensure this logo is properly placed in the public folder
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      {
+        media: '(prefers-color-scheme: light)',
+        url: '/logo-dark.svg',
+        href: '/logo-dark.svg',
+      },
+      {
+        media: '(prefers-color-scheme: dark)',
+        url: '/logo.svg',
+        href: '/logo.svg',
+      },
+    ],
   },
 };
 
@@ -49,7 +58,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Head>
-        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logo-dark.svg" type="image/svg+xml" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="UTF-8" />
         <meta name="author" content="YT Shorts" />

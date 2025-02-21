@@ -14,7 +14,7 @@ export const metadata = {
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="overflow-hidden">
       <DashboardProvider>{children}</DashboardProvider>
     </div>
   );

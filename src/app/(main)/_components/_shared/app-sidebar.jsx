@@ -38,11 +38,13 @@ export const AppSidebar = () => {
 
       <SidebarContent>
         <SidebarGroup>
-          <div className="mx-3 mt-10">
-            <Button variant="default" className="w-full flex items-center gap-2">
-              <PlusCircle className="h-5 w-5" />
-              Create New Video
-            </Button>
+          <div className="mx-3 mt-8">
+            <Link href="/create-new-video">
+              <Button variant="default" className="w-full flex items-center gap-2">
+                <PlusCircle className="h-5 w-5" />
+                Create New Video
+              </Button>
+            </Link>
           </div>
 
           <SidebarMenu className="mt-6">
