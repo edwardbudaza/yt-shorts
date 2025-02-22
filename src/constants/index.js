@@ -168,12 +168,12 @@ export const captionOptions = [
 ];
 
 export const SCRIPT_PROMPT = `
-Write two distinct scripts for a 30-second video on Topic: {topic},
+Write two distinct scripts for a 30-60 second video on Topic: {topic},
 
 Use plain text storytelling with no scene descriptions.
 
 Avoid brackets, parentheses, or additional formatting—just the script content.
 
-Ensure each script has a clear beginning, middle, and end.
+Ensure each script has a clear hook, beginning, middle, and end.
 
 Return the response strictly in JSON format following this schema: {scripts:[{content:''}]}`;
