@@ -9,4 +9,18 @@ export default defineSchema({
     credits: v.number(),
     createdAt: v.string(),
   }),
+
+  videoData: defineTable({
+    title: v.string(),
+    topic: v.string(),
+    script: v.string(),
+    videoStyle: v.string(),
+    caption: v.any(),
+    voice: v.string(),
+    images: v.optional(v.any()),
+    audioUrl: v.optional(v.string()),
+    captionJson: v.optional(v.string()),
+    uid: v.id('users'),
+    createdBy: v.string(),
+  }),
 });

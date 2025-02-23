@@ -17,10 +17,7 @@ export const GenerateVideoData = inngest.createFunction(
   { event: 'generate-video-data' },
   async ({ event, step }) => {
     const { script, topic, title, caption, videoStyle, voice } = event?.data;
-    console.log('Inngest function:');
-    console.log('Script: ', script);
-    console.log('Voice: ', voice);
-    console.log('----------------'); // Generate Audio File MP3
+
     const GenerateAudioFile = await step.run('GenerateAudioFile', async () => {
       const result = await axios.post(
         BASE_URL + '/api/text-to-speech',
