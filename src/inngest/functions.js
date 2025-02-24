@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { inngest } from './client';
+import { createClient } from '@deepgram/sdk';
 
 export const helloWorld = inngest.createFunction(
   { id: 'hello-world' },
@@ -18,6 +19,7 @@ export const GenerateVideoData = inngest.createFunction(
   async ({ event, step }) => {
     const { script, topic, title, caption, videoStyle, voice } = event?.data;
 
+    // Generate Audio File MP3
     const GenerateAudioFile = await step.run('GenerateAudioFile', async () => {
       const result = await axios.post(
         BASE_URL + '/api/text-to-speech',
@@ -36,10 +38,29 @@ export const GenerateVideoData = inngest.createFunction(
       return result.data.audio;
     });
     // Generate Captions
+    const GenerateCaptions = await step.run('generateCaptions', async () => {
+      const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
+
+      // STEP 2: Call the transcribeUrl method with the audio payload and options
+      const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
+        {
+          url: GenerateAudioFile,
+        },
+        // STEP 3: Configure Deepgram options for audio analysis
+        {
+          model: 'nova-3',
+          // smart_format: true,
+        },
+      );
+
+      const words = result.results?.channels?.[0]?.alternatives?.[0]?.words;
+
+      return words;
+    });
     // Generate Image Prompt from Script
     // Generate Images using AI
     // Save All Data to DB
 
-    return GenerateAudioFile;
+    return GenerateCaptions;
   },
 );
