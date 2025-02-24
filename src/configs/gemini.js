@@ -37,5 +37,26 @@ export const generateScript = model.startChat({
   ],
 });
 
+export const generateImageScript = model.startChat({
+  generationConfig,
+  history: [
+    {
+      role: 'user',
+      parts: [
+        {
+          text: 'Generate detailed image prompts in the Realistic style for each scene of a 30 to 60-second video based on the provided script: "Did you know Steve Jobs was once fired from Apple? After creating the Macintosh, Apple\'s board pushed him out. He started NeXT, a computer company that struggled for years. The NeXT computer was innovative but expensive and didn\'t sell well. Despite the failure, Apple eventually bought NeXT, bringing Jobs back. It was his return that led to the iPod, iPhone, and Apple\'s incredible resurgence. Sometimes, even a firing can be a stepping stone.".\n\nGuidelines:\n- Generate prompts strictly based on the storyline.\n- Do not include camera angles in the prompts.\n- Ensure each prompt captures key visual details relevant to the scene.\n- Return JSON data with a maximum of 5-10 images.\n- Follow this schema:\n[\n  {\n    "imagePrompt": "",\n    "sceneContent": "<Script Content>"\n  }\n]',
+        },
+      ],
+    },
+    {
+      role: 'model',
+      parts: [
+        {
+          text: '```json\n[\n  {\n    "imagePrompt": "A tense boardroom meeting, circa 1985. Steve Jobs, mid-30s, with intense eyes and a slight frown, stands opposite a long table of older, stern-faced board members in suits. Papers scattered on the table. Sunlight streams dramatically through a window, highlighting the tension.",\n    "sceneContent": "Did you know Steve Jobs was once fired from Apple? After creating the Macintosh, Apple\'s board pushed him out."\n  },\n  {\n    "imagePrompt": "Steve Jobs in a minimalist office space, late 1980s. He\'s younger, more intense, standing beside a sleek black NeXT Computer. The office is clean but sparsely furnished. Natural light from a window illuminates the futuristic design of the computer.",\n    "sceneContent": "He started NeXT, a computer company that struggled for years. The NeXT computer was innovative but expensive and didn\'t sell well."\n  },\n  {\n    "imagePrompt": "Empty office, early 90s. A single NeXT computer sits unused on a desk. Dust motes float in the air, illuminated by a single shaft of light. The scene conveys a sense of failure and abandonment.",\n    "sceneContent": "Despite the failure..."\n  },\n  {\n    "imagePrompt": "Apple headquarters, late 1990s. Steve Jobs, now in his 40s, with a knowing smile, walks confidently through a modern office. Employees are working diligently at their desks, a sense of quiet optimism in the air.",\n    "sceneContent": "Apple eventually bought NeXT, bringing Jobs back."\n  },\n  {\n    "imagePrompt": "Close-up shot of the original iPod in Steve Jobs\' hand. He\'s smiling subtly. The background is blurred, emphasizing the sleek design of the iPod. The iPod shines with a subtle glint.",\n    "sceneContent": "It was his return that led to the iPod, iPhone..."\n  },\n  {\n    "imagePrompt": "Montage of iconic Apple products: the iPod, iPhone, iPad, MacBook. Each product is displayed in a clean, modern setting, emphasizing their minimalist design and technological innovation. Light bounces off each surface.",\n    "sceneContent": "...and Apple\'s incredible resurgence. Sometimes, even a firing can be a stepping stone."\n  }\n]\n```',
+        },
+      ],
+    },
+  ],
+});
 // const result = await chatSession.sendMessage('INSERT_INPUT_HERE');
 // console.log(result.response.text());

@@ -167,6 +167,23 @@ export const captionOptions = [
   },
 ];
 
+export const ImagePromptScript = `
+Generate detailed image prompts in the {style} style for each scene of a 30 to 60-second video based on the provided script: {script}.
+
+Guidelines:
+- Generate prompts strictly based on the storyline.
+- Do not include camera angles in the prompts.
+- Ensure each prompt captures key visual details relevant to the scene.
+- Return JSON data with a maximum of 5-10 images.
+- Follow this schema:
+[
+  {
+    "imagePrompt": "",
+    "sceneContent": "<Script Content>"
+  }
+]
+`;
+
 export const SCRIPT_PROMPT = `
 Write two distinct scripts for a 30-60 second video on Topic: {topic},
 
@@ -176,4 +193,5 @@ Avoid brackets, parentheses, or additional formatting—just the script content.
 
 Ensure each script has a clear hook, beginning, middle, and end.
 
-Return the response strictly in JSON format following this schema: {scripts:[{content:''}]}`;
+Return the response strictly in JSON format following this schema: {scripts:[{content:''}]}
+`;

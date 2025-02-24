@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { inngest } from './client';
 import { createClient } from '@deepgram/sdk';
+import { generateImageScript } from '@/configs/gemini';
+import { ImagePromptScript } from '@/constants';
 
 export const helloWorld = inngest.createFunction(
   { id: 'hello-world' },
@@ -20,7 +22,7 @@ export const GenerateVideoData = inngest.createFunction(
     const { script, topic, title, caption, videoStyle, voice } = event?.data;
 
     // Generate Audio File MP3
-    const GenerateAudioFile = await step.run('GenerateAudioFile', async () => {
+    const GenerateAudioFile = await step.run('generateAudioFile', async () => {
       const result = await axios.post(
         BASE_URL + '/api/text-to-speech',
         {
@@ -58,9 +60,19 @@ export const GenerateVideoData = inngest.createFunction(
       return words;
     });
     // Generate Image Prompt from Script
+    const GenerateImagePrompt = await step.run('generateImagePrompt', async () => {
+      const FINAL_PROMPT = ImagePromptScript.replace('{style}', videoStyle).replace(
+        '{script}',
+        script,
+      );
+      const result = await generateImageScript.sendMessage(FINAL_PROMPT);
+      const resp = JSON.parse(result.response.text());
+
+      return resp;
+    });
     // Generate Images using AI
     // Save All Data to DB
 
-    return GenerateCaptions;
+    return GenerateImagePrompt;
   },
 );
